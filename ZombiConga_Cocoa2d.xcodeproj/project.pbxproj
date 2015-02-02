@@ -7,8 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55A7F3871A7FCAA700FB9E4C /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3811A7FCAA700FB9E4C /* cat.png */; };
+		55A7F3881A7FCAA700FB9E4C /* enemy.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3821A7FCAA700FB9E4C /* enemy.png */; };
+		55A7F3891A7FCAA700FB9E4C /* zombie1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3831A7FCAA700FB9E4C /* zombie1.png */; };
+		55A7F38A1A7FCAA700FB9E4C /* zombie2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3841A7FCAA700FB9E4C /* zombie2.png */; };
+		55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3851A7FCAA700FB9E4C /* zombie3.png */; };
+		55A7F38C1A7FCAA700FB9E4C /* zombie4.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3861A7FCAA700FB9E4C /* zombie4.png */; };
 		55C3F4DA1A7F5A8300711602 /* configCocos2d.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4D91A7F5A8300711602 /* configCocos2d.plist */; };
 		55C3F4E41A7F5C7300711602 /* ZCMaineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */; };
+		55C3F4F81A7FB9C200711602 /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4EC1A7FB9C200711602 /* background1.png */; };
+		55C3F4F91A7FB9C200711602 /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4ED1A7FB9C200711602 /* background2.png */; };
+		55C3F4FA1A7FB9C200711602 /* MainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4EE1A7FB9C200711602 /* MainMenu.png */; };
+		55C3F4FB1A7FB9C200711602 /* YouLose.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4EF1A7FB9C200711602 /* YouLose.png */; };
+		55C3F4FC1A7FB9C200711602 /* YouWin.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4F01A7FB9C200711602 /* YouWin.png */; };
+		55C3F4FD1A7FB9C200711602 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4F21A7FB9C200711602 /* backgroundMusic.mp3 */; };
+		55C3F4FE1A7FB9C200711602 /* hitCat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4F31A7FB9C200711602 /* hitCat.wav */; };
+		55C3F4FF1A7FB9C200711602 /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4F41A7FB9C200711602 /* hitCatLady.wav */; };
+		55C3F5001A7FB9C200711602 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4F51A7FB9C200711602 /* lose.wav */; };
+		55C3F5011A7FB9C200711602 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4F61A7FB9C200711602 /* win.wav */; };
 		5B121030197484FA004C1E1D /* ZombiConga_Cocoa_dActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* ZombiConga_Cocoa_dActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
@@ -138,9 +154,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		55A7F3811A7FCAA700FB9E4C /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		55A7F3821A7FCAA700FB9E4C /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
+		55A7F3831A7FCAA700FB9E4C /* zombie1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie1.png; sourceTree = "<group>"; };
+		55A7F3841A7FCAA700FB9E4C /* zombie2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie2.png; sourceTree = "<group>"; };
+		55A7F3851A7FCAA700FB9E4C /* zombie3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie3.png; sourceTree = "<group>"; };
+		55A7F3861A7FCAA700FB9E4C /* zombie4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie4.png; sourceTree = "<group>"; };
 		55C3F4D91A7F5A8300711602 /* configCocos2d.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configCocos2d.plist; sourceTree = "<group>"; };
 		55C3F4E21A7F5C7300711602 /* ZCMaineScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCMaineScene.h; sourceTree = "<group>"; };
 		55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCMaineScene.m; sourceTree = "<group>"; };
+		55C3F4EC1A7FB9C200711602 /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background1.png; sourceTree = "<group>"; };
+		55C3F4ED1A7FB9C200711602 /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
+		55C3F4EE1A7FB9C200711602 /* MainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainMenu.png; sourceTree = "<group>"; };
+		55C3F4EF1A7FB9C200711602 /* YouLose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YouLose.png; sourceTree = "<group>"; };
+		55C3F4F01A7FB9C200711602 /* YouWin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YouWin.png; sourceTree = "<group>"; };
+		55C3F4F21A7FB9C200711602 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		55C3F4F31A7FB9C200711602 /* hitCat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCat.wav; sourceTree = "<group>"; };
+		55C3F4F41A7FB9C200711602 /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hitCatLady.wav; sourceTree = "<group>"; };
+		55C3F4F51A7FB9C200711602 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
+		55C3F4F61A7FB9C200711602 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
 		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -261,6 +293,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55A7F3801A7FCAA700FB9E4C /* sprites */ = {
+			isa = PBXGroup;
+			children = (
+				55A7F3811A7FCAA700FB9E4C /* cat.png */,
+				55A7F3821A7FCAA700FB9E4C /* enemy.png */,
+				55A7F3831A7FCAA700FB9E4C /* zombie1.png */,
+				55A7F3841A7FCAA700FB9E4C /* zombie2.png */,
+				55A7F3851A7FCAA700FB9E4C /* zombie3.png */,
+				55A7F3861A7FCAA700FB9E4C /* zombie4.png */,
+			);
+			name = sprites;
+			path = Platforms/iOS/sprites;
+			sourceTree = "<group>";
+		};
 		55C3F4CF1A7F565800711602 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +315,32 @@
 			);
 			name = Scenes;
 			path = Source/Platforms/iOS/Scenes;
+			sourceTree = "<group>";
+		};
+		55C3F4EB1A7FB9C200711602 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				55C3F4EC1A7FB9C200711602 /* background1.png */,
+				55C3F4ED1A7FB9C200711602 /* background2.png */,
+				55C3F4EE1A7FB9C200711602 /* MainMenu.png */,
+				55C3F4EF1A7FB9C200711602 /* YouLose.png */,
+				55C3F4F01A7FB9C200711602 /* YouWin.png */,
+			);
+			name = Images;
+			path = Platforms/iOS/Images;
+			sourceTree = "<group>";
+		};
+		55C3F4F11A7FB9C200711602 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				55C3F4F21A7FB9C200711602 /* backgroundMusic.mp3 */,
+				55C3F4F31A7FB9C200711602 /* hitCat.wav */,
+				55C3F4F41A7FB9C200711602 /* hitCatLady.wav */,
+				55C3F4F51A7FB9C200711602 /* lose.wav */,
+				55C3F4F61A7FB9C200711602 /* win.wav */,
+			);
+			name = Sounds;
+			path = Platforms/iOS/Sounds;
 			sourceTree = "<group>";
 		};
 		5B12100D197483EE004C1E1D /* res */ = {
@@ -381,6 +453,9 @@
 		7A40366219DDF8CB007B6E8F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				55A7F3801A7FCAA700FB9E4C /* sprites */,
+				55C3F4EB1A7FB9C200711602 /* Images */,
+				55C3F4F11A7FB9C200711602 /* Sounds */,
 				5B121034197485FE004C1E1D /* Info.plist */,
 				55C3F4D91A7F5A8300711602 /* configCocos2d.plist */,
 			);
@@ -713,20 +788,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A7F3871A7FCAA700FB9E4C /* cat.png in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				55A7F38C1A7FCAA700FB9E4C /* zombie4.png in Resources */,
+				55C3F4FA1A7FB9C200711602 /* MainMenu.png in Resources */,
+				55C3F4F91A7FB9C200711602 /* background2.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
+				55A7F3881A7FCAA700FB9E4C /* enemy.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */,
+				55C3F4FB1A7FB9C200711602 /* YouLose.png in Resources */,
+				55C3F4F81A7FB9C200711602 /* background1.png in Resources */,
 				55C3F4DA1A7F5A8300711602 /* configCocos2d.plist in Resources */,
+				55A7F38A1A7FCAA700FB9E4C /* zombie2.png in Resources */,
+				55C3F4FD1A7FB9C200711602 /* backgroundMusic.mp3 in Resources */,
+				55C3F4FE1A7FB9C200711602 /* hitCat.wav in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
+				55C3F4FC1A7FB9C200711602 /* YouWin.png in Resources */,
+				55C3F5001A7FB9C200711602 /* lose.wav in Resources */,
 				B7378976180762440076A88C /* Default-Landscape~ipad.png in Resources */,
+				55C3F4FF1A7FB9C200711602 /* hitCatLady.wav in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
+				55A7F3891A7FCAA700FB9E4C /* zombie1.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
+				55C3F5011A7FB9C200711602 /* win.wav in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

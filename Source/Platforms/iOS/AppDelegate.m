@@ -30,6 +30,7 @@
 
 #import "ZCMaineScene.h"
 
+
 @implementation AppController
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -286,9 +286,9 @@ static NSString * const kZCEnemySpriteName      = @"enemy.png";
            direction:(CGPoint)direction
  rotateRadiansPerSec:(CGFloat)radiansPerSec
 {
-    CGFloat angle = CGShortestAngleBetween(CC_DEGREES_TO_RADIANS(sprite.rotation), CGAngleVector(direction));
+    CGFloat angle = CGShortestAngleBetween(CC_DEGREES_TO_RADIANS(-sprite.rotation), CGAngleVector(direction));
     CGFloat amountToRotate = fmin(radiansPerSec * self.dt, fabs(angle));
-    sprite.rotation += CC_RADIANS_TO_DEGREES(CGScalarSign(angle) * amountToRotate);
+    sprite.rotation -= CGScalarSign(angle) * CC_RADIANS_TO_DEGREES( amountToRotate);
 }
 
 - (void)boundsCheckZombie {

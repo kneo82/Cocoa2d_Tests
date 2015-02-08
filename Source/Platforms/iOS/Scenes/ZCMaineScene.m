@@ -19,6 +19,8 @@ static NSString * const kZCAnimationKey         = @"animation";
 static NSString * const kZCCatSpriteName        = @"cat.png";
 static NSString * const kZCEnemySpriteName      = @"enemy.png";
 
+static const CGFloat radiusDebugLine            = 2.0;
+
 @interface ZCMaineScene ()
 @property (nonatomic, strong)   ZCZombieSprite  *zombie;
 @property (nonatomic, assign)   NSTimeInterval  lastUpdateTime;
@@ -103,7 +105,7 @@ static NSString * const kZCEnemySpriteName      = @"enemy.png";
                                                                                                 [CCActionDelay actionWithDuration:1]
                                                                                                 ]]]];
 
-//    [self debugDrawPlayableArea];
+    [self debugDrawPlayableArea];
 }
 
 - (void) update:(CCTime)delta {
@@ -130,7 +132,6 @@ static NSString * const kZCEnemySpriteName      = @"enemy.png";
     [self boundsCheckZombie];
     
     [self checkCollisions];
-
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -324,20 +325,22 @@ static NSString * const kZCEnemySpriteName      = @"enemy.png";
 
 - (void)debugDrawPlayableArea {
     CCDrawNode *shape = [CCDrawNode node];
-
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddRect(path, nil, [self boundingBox]);
-    CCColor *color = [CCColor colorWithCcColor4b:ccc4(255, 80, 80, 1)];
+    [shape clear];
     
-    CGPoint point = CGPathGetCurrentPoint(path);
-    CGPoint startPoint = point;
-    while (CGPointEqualToPoint(point, CGPointZero)) {
-        CGPoint next = CGPathGetCurrentPoint(path);
-        
-        next = CGPointEqualToPoint(next, CGPointZero) ? startPoint : next;
-        [shape drawSegmentFrom:point to:next radius:5 color:color];
-    }
+    CGRect rect = [self boundingBox];
+    CCColor *color = [CCColor colorWithCcColor4b:ccc4(255, 0, 0, 255)];
+    CGPoint startPoint = rect.origin;
+    CGSize size = rect.size;
+    CGPoint rightBottom = CGPointMake(startPoint.x + size.width, startPoint.y);
+    CGPoint leftUp = CGPointMake(startPoint.x, startPoint.y + size.height);
+    CGPoint rightUp = CGPointMake(startPoint.x + size.width, startPoint.y + size.height);
     
+    [shape drawSegmentFrom:startPoint to:rightBottom radius:radiusDebugLine color:color];
+    [shape drawSegmentFrom:startPoint to:leftUp radius:radiusDebugLine color:color];
+    [shape drawSegmentFrom:rightBottom to:rightUp radius:radiusDebugLine color:color];
+    [shape drawSegmentFrom:leftUp to:rightUp radius:radiusDebugLine color:color];
+//    [shape drawSegmentFrom:CGPointMake(0, 0) to:CGPointMake(200, 200) radius:radiusDebugLine color:color];
+  
     [self addChild:shape];
 }
 

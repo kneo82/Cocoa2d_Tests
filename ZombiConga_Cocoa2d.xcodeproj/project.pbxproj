@@ -421,9 +421,9 @@
 			isa = PBXGroup;
 			children = (
 				55BD93421A8209B700EA7890 /* Sprites */,
+				55C3F4CF1A7F565800711602 /* Scenes */,
 				55BCFBF91A812B1F003AEBC6 /* CGGeometry+ZCExtension.h */,
 				55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */,
-				55C3F4CF1A7F565800711602 /* Scenes */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 			);

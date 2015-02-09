@@ -148,6 +148,13 @@ static const CGFloat radiusDebugLine            = 2.0;
     [self sceneTouched:touchLocation];
 }
 
+- (void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
+    CGPoint touchLocation = [touch locationInNode:self];
+    
+    self.lastTouchLocation = touchLocation;
+    [self sceneTouched:touchLocation];
+}
+
 #pragma mark -
 #pragma mark Private
 
@@ -158,9 +165,20 @@ static const CGFloat radiusDebugLine            = 2.0;
 }
 
 - (void)zombieHitEnemy:(CCSprite *)enemy {
+    self.invincible = YES;
+    
     [self playEnemyColision];
     
-    [enemy removeFromParent];
+    float blinkTimes = 10;
+    float blinkDuration = 3.0;
+    CCActionBlink *blinkAction = [CCActionBlink actionWithDuration:blinkDuration blinks:blinkTimes];
+    CCActionCallBlock *blockAction = [CCActionCallBlock actionWithBlock:^{
+        self.invincible = NO;
+    }];
+    
+    CCActionSequence *sequenceAction = [CCActionSequence actionWithArray:@[blinkAction, blockAction]];
+    
+    [self.zombie runAction:sequenceAction];
 }
 
 - (void)checkCollisions {
@@ -178,6 +196,10 @@ static const CGFloat radiusDebugLine            = 2.0;
         [self zombieHitCat:cat];
     }
     
+    if (self.isInvincible) {
+        return;
+    }
+
     NSMutableArray *hitEnemies = [NSMutableArray array];
     
     for (CCSprite *sprite in self.children) {
@@ -257,7 +279,9 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     [self addChild:enemy];
     
-    CCAction *actionMove = [CCActionMoveTo actionWithDuration:4 position:ccp((-enemySize.width / 2), enemy.position.y)];
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:4
+                                                     position:ccp((-enemySize.width / 2), enemy.position.y)];
+    
     CCAction *actionRemove = [CCActionRemove action];
     [enemy runAction:[CCActionSequence actionWithArray:@[actionMove, actionRemove]]];
 }
@@ -339,7 +363,6 @@ static const CGFloat radiusDebugLine            = 2.0;
     [shape drawSegmentFrom:startPoint to:leftUp radius:radiusDebugLine color:color];
     [shape drawSegmentFrom:rightBottom to:rightUp radius:radiusDebugLine color:color];
     [shape drawSegmentFrom:leftUp to:rightUp radius:radiusDebugLine color:color];
-//    [shape drawSegmentFrom:CGPointMake(0, 0) to:CGPointMake(200, 200) radius:radiusDebugLine color:color];
   
     [self addChild:shape];
 }

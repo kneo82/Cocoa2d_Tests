@@ -192,12 +192,13 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     for (CCSprite *cat in trainCats) {
         if (!cat.numberOfRunningActions) {
-            float actionDuration = 0.031;
+            float actionDuration = 0.31;
             CGPoint offset = CGSubtractionVectors(targetPosition, cat.position);
             CGPoint direction = CGNormalizedVector(offset);
             CGPoint amountToMovePerSec = CGMultiplicationVectorOnScalar(direction, CAT_MOVE_POINTS_PER_SEC);
-            CGPoint amountToMove = CGMultiplicationVectorOnScalar(amountToMovePerSec, self.dt);
-            CCActionMoveTo *moveAction = [CCActionMoveTo actionWithDuration:actionDuration position:CGAddVectors(cat.position, amountToMove)];
+            CGPoint amountToMove = CGMultiplicationVectorOnScalar(amountToMovePerSec, actionDuration);
+            CCActionMoveBy *moveAction = [CCActionMoveBy actionWithDuration:actionDuration position:amountToMove];
+            
             [cat runAction:moveAction];
         }
 

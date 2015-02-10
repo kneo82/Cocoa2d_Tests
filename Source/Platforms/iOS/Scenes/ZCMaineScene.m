@@ -12,11 +12,12 @@
 #import "ZCZombieSprite.h"
 
 static const float ZOMBIE_MOVE_POINTS_PER_SEC = 120.0;
-static const float ZOMBIE_ROTATE_RADIANS_PER_SEC = 4 * M_PI;
 static const float CAT_MOVE_POINTS_PER_SEC = 120.0;
+
 static const CGFloat zombieRotateRadiansPerSec  = 4.0 * M_PI;
 static NSString * const kZCAnimationKey         = @"animation";
 static NSString * const kZCCatSpriteName        = @"cat.png";
+static NSString * const kZCCatTrainSpriteName   = @"train";
 static NSString * const kZCEnemySpriteName      = @"enemy.png";
 
 static const CGFloat radiusDebugLine            = 2.0;
@@ -29,6 +30,7 @@ static const CGFloat radiusDebugLine            = 2.0;
 @property (nonatomic, assign)   CGPoint         lastTouchLocation;
 @property (nonatomic, strong)   CCAction        *zombieAnimation;
 @property (nonatomic, assign)   CGSize          spriteSize;
+@property (nonatomic, assign)   CGFloat         scaleCat;
 
 @property (nonatomic, assign, getter = isInvincible)    BOOL    invincible;
 
@@ -62,6 +64,7 @@ static const CGFloat radiusDebugLine            = 2.0;
         
         ZCZombieSprite *zombie = [ZCZombieSprite spriteWithSize:self.spriteSize];
      
+        zombie.zOrder = 100;
         [self addChild:zombie];
         self.zombie = zombie;
         
@@ -132,6 +135,7 @@ static const CGFloat radiusDebugLine            = 2.0;
     [self boundsCheckZombie];
     
     [self checkCollisions];
+    [self moveTrain];
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -160,8 +164,45 @@ static const CGFloat radiusDebugLine            = 2.0;
 
 - (void)zombieHitCat:(CCSprite *)cat {
     [self playCatColision];
+
+    cat.name = kZCCatTrainSpriteName;
+    [cat stopAllActions];
+    cat.scale = self.scaleCat;
+    cat.rotation = 0;
     
-    [cat removeFromParent];
+    CCActionDelay *actionDelay = [CCActionDelay actionWithDuration:0.2];
+    CCActionCallBlock *colorizeAction = [CCActionCallBlock actionWithBlock:^{
+        cat.color = [CCColor colorWithRed:0 green:200 blue:0];
+    }];
+    
+    CCActionSequence *sequenceAction = [CCActionSequence actionWithArray:@[actionDelay, colorizeAction]];
+    [cat runAction:sequenceAction];
+}
+
+- (void)moveTrain {
+    __block CGPoint targetPosition = self.zombie.position;
+    
+    NSMutableArray *trainCats = [NSMutableArray array];
+    
+    for (CCSprite *sprite in self.children) {
+        if ([sprite.name isEqualToString:kZCCatTrainSpriteName]) {
+            [trainCats addObject:sprite];
+        }
+    }
+    
+    for (CCSprite *cat in trainCats) {
+        if (!cat.numberOfRunningActions) {
+            float actionDuration = 0.031;
+            CGPoint offset = CGSubtractionVectors(targetPosition, cat.position);
+            CGPoint direction = CGNormalizedVector(offset);
+            CGPoint amountToMovePerSec = CGMultiplicationVectorOnScalar(direction, CAT_MOVE_POINTS_PER_SEC);
+            CGPoint amountToMove = CGMultiplicationVectorOnScalar(amountToMovePerSec, self.dt);
+            CCActionMoveTo *moveAction = [CCActionMoveTo actionWithDuration:actionDuration position:CGAddVectors(cat.position, amountToMove)];
+            [cat runAction:moveAction];
+        }
+
+        targetPosition = cat.position;
+    }
 }
 
 - (void)zombieHitEnemy:(CCSprite *)enemy {
@@ -220,9 +261,9 @@ static const CGFloat radiusDebugLine            = 2.0;
     CGFloat scaleX = self.spriteSize.width / cat.contentSize.width;
     CGFloat scaleY = self.spriteSize.height / cat.contentSize.height;
     
-    CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
+    self.scaleCat = scaleX < scaleY ? scaleX : scaleY;
 
-    cat.scale = scale + scale * 0.1;
+    cat.scale = self.scaleCat + self.scaleCat * 0.1;
     
     CGRect rect = [self boundingBox];
     
@@ -238,7 +279,7 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     cat.rotation = CC_RADIANS_TO_DEGREES(- M_PI / 16.0);
     
-    CCActionScaleBy *scaleUp = [CCActionScaleBy actionWithDuration:0.25 scale:scale + 0.03];
+    CCActionScaleBy *scaleUp = [CCActionScaleBy actionWithDuration:0.25 scale:self.scaleCat + 0.03];
     CCAction *scaleDown = scaleUp.reverse;//[CCActionReverse actionWithAction:scaleUp];
     CCActionSequence *fullScale = [CCActionSequence actionWithArray:@[scaleUp, scaleDown, scaleUp, scaleDown]];
     
@@ -249,7 +290,7 @@ static const CGFloat radiusDebugLine            = 2.0;
     CCActionSpawn *group = [CCActionSpawn actionWithArray:@[fullScale, fullWiggle]];
     CCActionRepeat *groupWait = [CCActionRepeat actionWithAction:group times:10];
     
-    CCActionScaleTo *appear = [CCActionScaleTo actionWithDuration:0.5 scale:scale];
+    CCActionScaleTo *appear = [CCActionScaleTo actionWithDuration:0.5 scale:self.scaleCat];
     CCActionScaleTo *disappear = [CCActionScaleTo actionWithDuration:0.5 scale:0];
     CCActionRemove *removeFromParent = [CCActionRemove action];// removeFromParent];
     

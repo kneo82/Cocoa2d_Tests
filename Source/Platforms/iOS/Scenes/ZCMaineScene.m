@@ -10,6 +10,7 @@
 #import "CGGeometry+ZCExtension.h"
 
 #import "ZCZombieSprite.h"
+#import "GameOverScene.h"
 
 static const float ZOMBIE_MOVE_POINTS_PER_SEC = 120.0;
 static const float CAT_MOVE_POINTS_PER_SEC = 120.0;
@@ -156,10 +157,6 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     [self checkCollisions];
     [self moveTrain];
-    
-//    if (_lives <= 0 && !_gameOver) { _gameOver = YES;
-//        NSLog(@"You lose!");
-//    }
 }
 
 - (void)setLives:(NSUInteger)lives {
@@ -170,6 +167,16 @@ static const CGFloat radiusDebugLine            = 2.0;
             self.gameOver = YES;
             NSLog(@"You Lose!");
         }
+    }
+}
+
+- (void)setGameOver:(BOOL)gameOver {
+    if (_gameOver != gameOver) {
+        _gameOver = gameOver;
+        
+        [[CCDirector sharedDirector] replaceScene:[GameOverScene nodeWithIsWin:self.lives]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:1]];
+        //transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
     }
 }
 

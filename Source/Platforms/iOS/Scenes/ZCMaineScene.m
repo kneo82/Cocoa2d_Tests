@@ -20,7 +20,7 @@ static NSString * const kZCAnimationKey         = @"animation";
 static NSString * const kZCCatSpriteName        = @"cat.png";
 static NSString * const kZCCatTrainSpriteName   = @"train";
 static NSString * const kZCEnemySpriteName      = @"enemy.png";
-static const NSUInteger kZCCountLives           = 5;
+static const NSUInteger kZCCountLives           = 15;
 
 static const CGFloat radiusDebugLine            = 2.0;
 
@@ -70,6 +70,9 @@ static const CGFloat radiusDebugLine            = 2.0;
         self.lives = kZCCountLives;
         
         self.userInteractionEnabled = YES;
+
+        [[OALSimpleAudio sharedInstance] playBg:@"backgroundMusic.mp3" loop:YES];
+
         CGSize size = [[CCDirector sharedDirector] viewSize];
 
         CCSprite *background = [CCSprite spriteWithImageNamed:@"background1.png"];
@@ -104,6 +107,29 @@ static const CGFloat radiusDebugLine            = 2.0;
 
 - (void)playEnemyColision {
     [[OALSimpleAudio sharedInstance] playEffect:@"hitCatLady.wav"];
+}
+
+- (void)setLives:(NSUInteger)lives {
+    if (_lives != lives) {
+        _lives = lives;
+        
+        if (0 >= lives && !self.gameOver) {
+            self.gameOver = YES;
+            NSLog(@"You Lose!");
+        }
+    }
+}
+
+- (void)setGameOver:(BOOL)gameOver {
+    if (_gameOver != gameOver) {
+        _gameOver = gameOver;
+        
+        [[OALSimpleAudio sharedInstance] stopBg];
+        
+        [[CCDirector sharedDirector] replaceScene:[GameOverScene nodeWithIsWin:self.lives]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:1]];
+        //transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    }
 }
 
 #pragma mark -
@@ -157,27 +183,6 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     [self checkCollisions];
     [self moveTrain];
-}
-
-- (void)setLives:(NSUInteger)lives {
-    if (_lives != lives) {
-        _lives = lives;
-        
-        if (0 >= lives && !self.gameOver) {
-            self.gameOver = YES;
-            NSLog(@"You Lose!");
-        }
-    }
-}
-
-- (void)setGameOver:(BOOL)gameOver {
-    if (_gameOver != gameOver) {
-        _gameOver = gameOver;
-        
-        [[CCDirector sharedDirector] replaceScene:[GameOverScene nodeWithIsWin:self.lives]
-                                   withTransition:[CCTransition transitionCrossFadeWithDuration:1]];
-        //transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
-    }
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {

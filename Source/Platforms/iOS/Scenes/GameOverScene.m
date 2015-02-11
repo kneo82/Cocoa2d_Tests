@@ -7,6 +7,7 @@
 //
 
 #import "GameOverScene.h"
+#import "ZCMaineScene.h"
 
 static NSString * const kZCWinScenImage     = @"YouWin.png";
 static NSString * const kZCLoseScenImage    = @"YouLose.png";
@@ -18,10 +19,15 @@ static NSString * const kZCLoseScenSound    = @"lose.wav";
 - (void)setBacgroundWithName:(NSString *)name;
 - (id)initWinScene;
 - (id)initLoseScene;
+- (void)playSoundWithName:(NSString *)name;
+- (void)gameOveActions;
 
 @end
 
 @implementation GameOverScene
+
+#pragma mark -
+#pragma mark Class Methods
 
 + (id)nodeWithIsWin:(BOOL)isWin {
     return isWin ? [[self alloc] initWinScene] : [[self alloc] initLoseScene];
@@ -35,7 +41,10 @@ static NSString * const kZCLoseScenSound    = @"lose.wav";
     
     if (self) {
         [self setBacgroundWithName:kZCLoseScenImage];
+        
         [self playSoundWithName:kZCLoseScenSound];
+        
+        [self gameOveActions];
     }
     
     return self;
@@ -48,6 +57,8 @@ static NSString * const kZCLoseScenSound    = @"lose.wav";
         [self setBacgroundWithName:kZCWinScenImage];
         
         [self playSoundWithName:kZCWinScenSound];
+        
+        [self gameOveActions];
     }
     
     return self;
@@ -55,6 +66,25 @@ static NSString * const kZCLoseScenSound    = @"lose.wav";
 
 #pragma mark -
 #pragma mark Private
+
+- (void)gameOveActions {
+    CCActionDelay *delayAction = [CCActionDelay actionWithDuration:3];
+    CCActionCallBlock *blockAction = [CCActionCallBlock actionWithBlock:^{
+        CCTransition *transition = [CCTransition transitionRevealWithDirection:CCTransitionDirectionDown duration:1];
+
+        transition.outgoingDownScale = 5;
+
+        
+        [[CCDirector sharedDirector] replaceScene:[ZCMaineScene node]
+                                   withTransition:transition];
+//         [CCTransition transitionPushWithDirection:CCTransitionDirectionDown
+//                                                                                   duration:1]];
+    }];
+    
+    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delayAction, blockAction]];
+    
+    [self runAction:sequence];
+}
 
 - (void)playSoundWithName:(NSString *)name {
     CCActionDelay *delayAction = [CCActionDelay actionWithDuration:0.1];

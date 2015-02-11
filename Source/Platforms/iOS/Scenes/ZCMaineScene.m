@@ -19,6 +19,7 @@ static NSString * const kZCAnimationKey         = @"animation";
 static NSString * const kZCCatSpriteName        = @"cat.png";
 static NSString * const kZCCatTrainSpriteName   = @"train";
 static NSString * const kZCEnemySpriteName      = @"enemy.png";
+static const NSUInteger kZCCountLives           = 5;
 
 static const CGFloat radiusDebugLine            = 2.0;
 
@@ -31,15 +32,31 @@ static const CGFloat radiusDebugLine            = 2.0;
 @property (nonatomic, strong)   CCAction        *zombieAnimation;
 @property (nonatomic, assign)   CGSize          spriteSize;
 @property (nonatomic, assign)   CGFloat         scaleCat;
-
+@property (nonatomic, assign)   BOOL            gameOver;
+@property (nonatomic, assign)   NSUInteger      lives;
 @property (nonatomic, assign, getter = isInvincible)    BOOL    invincible;
+
+- (void)loseCat;
+- (void)zombieHitCat:(CCSprite *)cat;
+- (void)moveTrain;
+- (void)zombieHitEnemy:(CCSprite *)enemy;
+- (void)checkCollisions;
+- (void)spawnCat;
+- (void)spawnEnemy;
+- (void)sceneTouched:(CGPoint)touchLocation;
+- (void)moveSprite:(CCSprite *)sprite velocity:(CGPoint)velocity;
+- (void)moveZombieToward:(CGPoint)location;
+- (void)rotateSprite:(CCSprite *)sprite
+           direction:(CGPoint)direction
+ rotateRadiansPerSec:(CGFloat)radiansPerSec;
+
+- (void)boundsCheckZombie;
+- (void)rotateSprite:(CCSprite *)sprite direction:(CGPoint)direction;
+- (void)debugDrawPlayableArea;
 
 @end
 
 @implementation ZCMaineScene
-
-//@synthesize catCollisionSound = _catCollisionSound;
-//@synthesize enemyCollisionSound = _enemyCollisionSound;
 
 #pragma mark -
 #pragma mark Initialization and Dealocation
@@ -48,6 +65,9 @@ static const CGFloat radiusDebugLine            = 2.0;
     self = [super init];
     
     if (self) {
+        self.gameOver = NO;
+        self.lives = kZCCountLives;
+        
         self.userInteractionEnabled = YES;
         CGSize size = [[CCDirector sharedDirector] viewSize];
 
@@ -136,6 +156,21 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     [self checkCollisions];
     [self moveTrain];
+    
+//    if (_lives <= 0 && !_gameOver) { _gameOver = YES;
+//        NSLog(@"You lose!");
+//    }
+}
+
+- (void)setLives:(NSUInteger)lives {
+    if (_lives != lives) {
+        _lives = lives;
+        
+        if (0 >= lives && !self.gameOver) {
+            self.gameOver = YES;
+            NSLog(@"You Lose!");
+        }
+    }
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -161,6 +196,37 @@ static const CGFloat radiusDebugLine            = 2.0;
 
 #pragma mark -
 #pragma mark Private
+
+- (void)loseCat {
+    NSUInteger loseCount = 0;
+    
+    for (CCSprite *sprite in self.children) {
+        if ([sprite.name isEqualToString:kZCCatTrainSpriteName]) {
+            CGPoint randomSpot = sprite.position;
+            randomSpot.x += CGFloatRandomInRange(-100, 100);
+            randomSpot.y += CGFloatRandomInRange(-100, 100);
+            
+            sprite.name = @"";
+            
+            CCActionRotateBy *rotateAction = [CCActionRotateBy actionWithDuration:1 angle:720];
+            CCActionMoveTo *moveAction = [CCActionMoveTo actionWithDuration:1 position:randomSpot];
+            CCActionScaleTo *scaleAction = [CCActionScaleTo actionWithDuration:1 scale:0];
+            
+            CCActionSpawn *groupAction = [CCActionSpawn actionWithArray:@[rotateAction, moveAction, scaleAction]];
+            CCActionRemove *removeAction = [CCActionRemove action];
+            
+            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[groupAction, removeAction]];
+            
+            [sprite runAction:sequence];
+            
+            loseCount++;
+            
+            if (loseCount >= 2) {
+                break;
+            }
+        }
+    }
+}
 
 - (void)zombieHitCat:(CCSprite *)cat {
     [self playCatColision];
@@ -188,6 +254,11 @@ static const CGFloat radiusDebugLine            = 2.0;
         if ([sprite.name isEqualToString:kZCCatTrainSpriteName]) {
             [trainCats addObject:sprite];
         }
+    }
+    
+    if (30 < trainCats.count && !self.gameOver) {
+        self.gameOver = YES;
+        NSLog(@"You win!");
     }
     
     for (CCSprite *cat in trainCats) {
@@ -221,6 +292,10 @@ static const CGFloat radiusDebugLine            = 2.0;
     CCActionSequence *sequenceAction = [CCActionSequence actionWithArray:@[blinkAction, blockAction]];
     
     [self.zombie runAction:sequenceAction];
+    
+    [self loseCat];
+    
+    self.lives--;
 }
 
 - (void)checkCollisions {
@@ -310,7 +385,7 @@ static const CGFloat radiusDebugLine            = 2.0;
     enemy.scale = scale;
     
     CGSize size = self.contentSize;
-    CGSize enemySize = enemy.contentSize;
+    CGSize enemySize = enemy.boundingBox.size;
     
     CGFloat min = CGRectGetMinY([self boundingBox]) + enemySize.height / 2;
     CGFloat max = CGRectGetMaxY([self boundingBox]) - enemySize.height / 2;

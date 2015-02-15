@@ -7,7 +7,7 @@
 //
 
 #import "GameOverScene.h"
-#import "ZCMaineScene.h"
+#import "ZCMenu.h"
 
 static NSString * const kZCWinScenImage     = @"YouWin.png";
 static NSString * const kZCLoseScenImage    = @"YouLose.png";
@@ -70,15 +70,11 @@ static NSString * const kZCLoseScenSound    = @"lose.wav";
 - (void)gameOveActions {
     CCActionDelay *delayAction = [CCActionDelay actionWithDuration:3];
     CCActionCallBlock *blockAction = [CCActionCallBlock actionWithBlock:^{
-        CCTransition *transition = [CCTransition transitionRevealWithDirection:CCTransitionDirectionDown duration:1];
+        CCTransition *transition = [CCTransition transitionCrossFadeWithDuration:1];
 
-        transition.outgoingDownScale = 5;
-
-        
-        [[CCDirector sharedDirector] replaceScene:[ZCMaineScene node]
+        [[CCDirector sharedDirector] replaceScene:[ZCMenu node]
                                    withTransition:transition];
-//         [CCTransition transitionPushWithDirection:CCTransitionDirectionDown
-//                                                                                   duration:1]];
+
     }];
     
     CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delayAction, blockAction]];

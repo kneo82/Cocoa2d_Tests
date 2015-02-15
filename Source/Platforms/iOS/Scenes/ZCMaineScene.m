@@ -10,15 +10,20 @@
 #import "CGGeometry+ZCExtension.h"
 
 #import "ZCZombieSprite.h"
+#import "GameOverScene.h"
 
 static const float ZOMBIE_MOVE_POINTS_PER_SEC = 120.0;
-static const float CAT_MOVE_POINTS_PER_SEC = 120.0;
+static const float CAT_MOVE_POINTS_PER_SEC = 140.0;
+
+static const CGFloat kZCBackgroundMovePointsPerSec = 60;
 
 static const CGFloat zombieRotateRadiansPerSec  = 4.0 * M_PI;
 static NSString * const kZCAnimationKey         = @"animation";
 static NSString * const kZCCatSpriteName        = @"cat.png";
 static NSString * const kZCCatTrainSpriteName   = @"train";
 static NSString * const kZCEnemySpriteName      = @"enemy.png";
+static NSString * const kZCBackgroundNodeName   = @"background";
+static const NSUInteger kZCCountLives           = 5;
 
 static const CGFloat radiusDebugLine            = 2.0;
 
@@ -31,15 +36,34 @@ static const CGFloat radiusDebugLine            = 2.0;
 @property (nonatomic, strong)   CCAction        *zombieAnimation;
 @property (nonatomic, assign)   CGSize          spriteSize;
 @property (nonatomic, assign)   CGFloat         scaleCat;
+@property (nonatomic, assign)   BOOL            gameOver;
+@property (nonatomic, assign)   NSUInteger      lives;
+@property (nonatomic, strong)   CCNode          *backgroundLayer;
 
 @property (nonatomic, assign, getter = isInvincible)    BOOL    invincible;
+
+- (void)loseCat;
+- (void)zombieHitCat:(CCSprite *)cat;
+- (void)moveTrain;
+- (void)zombieHitEnemy:(CCSprite *)enemy;
+- (void)checkCollisions;
+- (void)spawnCat;
+- (void)spawnEnemy;
+- (void)sceneTouched:(CGPoint)touchLocation;
+- (void)moveSprite:(CCSprite *)sprite velocity:(CGPoint)velocity;
+- (void)moveZombieToward:(CGPoint)location;
+- (void)rotateSprite:(CCSprite *)sprite
+           direction:(CGPoint)direction
+ rotateRadiansPerSec:(CGFloat)radiansPerSec;
+
+- (void)boundsCheckZombie;
+- (void)rotateSprite:(CCSprite *)sprite direction:(CGPoint)direction;
+- (void)debugDrawPlayableArea;
+- (void)moveBackground;
 
 @end
 
 @implementation ZCMaineScene
-
-//@synthesize catCollisionSound = _catCollisionSound;
-//@synthesize enemyCollisionSound = _enemyCollisionSound;
 
 #pragma mark -
 #pragma mark Initialization and Dealocation
@@ -48,24 +72,37 @@ static const CGFloat radiusDebugLine            = 2.0;
     self = [super init];
     
     if (self) {
+        self.gameOver = NO;
+        self.lives = kZCCountLives;
+        
+        self.backgroundLayer = [CCNode node];
+        [self addChild:self.backgroundLayer];
+        
         self.userInteractionEnabled = YES;
+
+        [[OALSimpleAudio sharedInstance] playBg:@"backgroundMusic.mp3" loop:YES];
+
         CGSize size = [[CCDirector sharedDirector] viewSize];
 
-        CCSprite *background = [CCSprite spriteWithImageNamed:@"background1.png"];
-        [background setPosition:CGPointMake(size.width / 2, size.height / 2)];
-        
-        CGSize imageSize = background.contentSize;
-        background.scaleX = size.width / imageSize.width;
-        background.scaleY = size.height / imageSize.height;
-        
-        self.spriteSize = CGSizeMake(background.contentSize.width * 0.04, background.contentSize.height * 0.04);
-        NSLog(@"Sprite size : %@", NSStringFromCGSize(self.spriteSize));
-        [self addChild:background z:-1];
+        for (int i = 0; i < 2; i++) {
+            CCSprite *background = [self backgroundNode];
+
+            CGSize imageSize = background.boundingBox.size;
+            background.scaleX =  size.width / (imageSize.width / 2);
+            background.scaleY = size.height / imageSize.height;
+            
+            background.position = CGPointMake(i * size.width * 2, 0);
+
+            [self.backgroundLayer addChild:background z:-1];
+        }
+
+        self.spriteSize = CGSizeMake(size.width * 0.15, size.height * 0.15);
         
         ZCZombieSprite *zombie = [ZCZombieSprite spriteWithSize:self.spriteSize];
      
         zombie.zOrder = 100;
-        [self addChild:zombie];
+        [self.backgroundLayer addChild:zombie];
+        
         self.zombie = zombie;
         
         [self createScene];
@@ -83,6 +120,29 @@ static const CGFloat radiusDebugLine            = 2.0;
 
 - (void)playEnemyColision {
     [[OALSimpleAudio sharedInstance] playEffect:@"hitCatLady.wav"];
+}
+
+- (void)setLives:(NSUInteger)lives {
+    if (_lives != lives) {
+        _lives = lives;
+        
+        if (0 >= lives && !self.gameOver) {
+            self.gameOver = YES;
+            NSLog(@"You Lose!");
+        }
+    }
+}
+
+- (void)setGameOver:(BOOL)gameOver {
+    if (_gameOver != gameOver) {
+        _gameOver = gameOver;
+        
+        [[OALSimpleAudio sharedInstance] stopBg];
+        
+        [[CCDirector sharedDirector] replaceScene:[GameOverScene nodeWithIsWin:self.lives]
+                                   withTransition:[CCTransition transitionCrossFadeWithDuration:1]];
+        //transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    }
 }
 
 #pragma mark -
@@ -119,41 +179,33 @@ static const CGFloat radiusDebugLine            = 2.0;
     CGPoint lastTouch = self.lastTouchLocation;
     
     if (!CGPointEqualToPoint(lastTouch, CGPointZero)) {
-        CGPoint diff = CGSubtractionVectors(lastTouch, zombie.position);
-        
-        if (CGLengthVector(diff) <= ZOMBIE_MOVE_POINTS_PER_SEC * self.dt) {
-            zombie.position = lastTouch;
-            self.velocity = CGPointZero;
-            
-            [self.zombie stopAnimation];
-        } else {
-            [self moveSprite:zombie velocity:self.velocity];
-            [self rotateSprite:zombie direction:self.velocity rotateRadiansPerSec:zombieRotateRadiansPerSec];
-        }
+        [self moveSprite:zombie velocity:self.velocity];
+        [self rotateSprite:zombie direction:self.velocity rotateRadiansPerSec:zombieRotateRadiansPerSec];
     }
     
     [self boundsCheckZombie];
     
     [self checkCollisions];
     [self moveTrain];
+    [self moveBackground];
 }
 
 - (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
-    CGPoint touchLocation = [touch locationInNode:self];
+    CGPoint touchLocation = [touch locationInNode:self.backgroundLayer];
 
     self.lastTouchLocation = touchLocation;
     [self sceneTouched:touchLocation];
 }
 
 - (void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
-    CGPoint touchLocation = [touch locationInNode:self];
+    CGPoint touchLocation = [touch locationInNode:self.backgroundLayer];
     
     self.lastTouchLocation = touchLocation;
     [self sceneTouched:touchLocation];
 }
 
 - (void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
-    CGPoint touchLocation = [touch locationInNode:self];
+    CGPoint touchLocation = [touch locationInNode:self.backgroundLayer];
     
     self.lastTouchLocation = touchLocation;
     [self sceneTouched:touchLocation];
@@ -161,6 +213,83 @@ static const CGFloat radiusDebugLine            = 2.0;
 
 #pragma mark -
 #pragma mark Private
+
+- (void)moveBackground {
+    CGSize size = [[CCDirector sharedDirector] viewSize];
+    
+    CGPoint bgVelocity = CGPointMake(-kZCBackgroundMovePointsPerSec, 0);
+    CGPoint amtToMove = CGMultiplicationVectorOnScalar(bgVelocity, self.dt);
+
+    CCNode *background = self.backgroundLayer;
+    background.position = CGAddVectors(background.position, amtToMove);
+    
+    for (CCSprite *sprite in self.backgroundLayer.children) {
+        if ([sprite.name isEqualToString:kZCBackgroundNodeName]) {
+            CGFloat scaleX =  size.width / (sprite.contentSize.width / 2);
+            CGFloat width = (sprite.contentSize.width  * scaleX);
+            
+            CGPoint bgScreenPos = [self.backgroundLayer convertToWindowSpace:sprite.position];
+            
+            if (bgScreenPos.x <= -width) {
+                sprite.position = CGPointMake(sprite.position.x + width * 2,
+                                              sprite.position.y);
+            }
+        }
+    }
+}
+
+- (CCSprite *)backgroundNode {
+    CCSprite *backgroundNode = [CCSprite node];
+    backgroundNode.anchorPoint = CGPointZero;
+    backgroundNode.name = kZCBackgroundNodeName;
+    
+    CCSprite *background1 = [CCSprite spriteWithImageNamed:@"background1.png"];
+    background1.anchorPoint = CGPointZero;
+    background1.position = CGPointMake(0, 0);
+    [backgroundNode addChild:background1];
+    
+    
+    CCSprite *background2 = [CCSprite spriteWithImageNamed:@"background2.png"];
+    background2.anchorPoint = CGPointZero;
+    background2.position = CGPointMake(background1.contentSize.width, 0);
+    [backgroundNode addChild:background2];
+    
+    backgroundNode.contentSize = CGSizeMake(background1.contentSize.width + background2.contentSize.width,
+                                            background2.contentSize.height);
+    
+    return backgroundNode;
+}
+
+- (void)loseCat {
+    NSUInteger loseCount = 0;
+    
+    for (CCSprite *sprite in self.backgroundLayer.children) {
+        if ([sprite.name isEqualToString:kZCCatTrainSpriteName]) {
+            CGPoint randomSpot = sprite.position;
+            randomSpot.x += CGFloatRandomInRange(-100, 100);
+            randomSpot.y += CGFloatRandomInRange(-100, 100);
+            
+            sprite.name = @"";
+            
+            CCActionRotateBy *rotateAction = [CCActionRotateBy actionWithDuration:1 angle:720];
+            CCActionMoveTo *moveAction = [CCActionMoveTo actionWithDuration:1 position:randomSpot];
+            CCActionScaleTo *scaleAction = [CCActionScaleTo actionWithDuration:1 scale:0];
+            
+            CCActionSpawn *groupAction = [CCActionSpawn actionWithArray:@[rotateAction, moveAction, scaleAction]];
+            CCActionRemove *removeAction = [CCActionRemove action];
+            
+            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[groupAction, removeAction]];
+            
+            [sprite runAction:sequence];
+            
+            loseCount++;
+            
+            if (loseCount >= 2) {
+                break;
+            }
+        }
+    }
+}
 
 - (void)zombieHitCat:(CCSprite *)cat {
     [self playCatColision];
@@ -184,10 +313,15 @@ static const CGFloat radiusDebugLine            = 2.0;
     
     NSMutableArray *trainCats = [NSMutableArray array];
     
-    for (CCSprite *sprite in self.children) {
+    for (CCSprite *sprite in self.backgroundLayer.children) {
         if ([sprite.name isEqualToString:kZCCatTrainSpriteName]) {
             [trainCats addObject:sprite];
         }
+    }
+    
+    if (30 < trainCats.count && !self.gameOver) {
+        self.gameOver = YES;
+        NSLog(@"You win!");
     }
     
     for (CCSprite *cat in trainCats) {
@@ -221,12 +355,16 @@ static const CGFloat radiusDebugLine            = 2.0;
     CCActionSequence *sequenceAction = [CCActionSequence actionWithArray:@[blinkAction, blockAction]];
     
     [self.zombie runAction:sequenceAction];
+    
+    [self loseCat];
+    
+    self.lives--;
 }
 
 - (void)checkCollisions {
     NSMutableArray *hitCats = [NSMutableArray array];
     
-    for (CCSprite *sprite in self.children) {
+    for (CCSprite *sprite in self.backgroundLayer.children) {
         if ([sprite.name isEqualToString:kZCCatSpriteName]) {
             if (CGRectIntersectsRect([sprite boundingBox], [self.zombie boundingBox])) {
                 [hitCats addObject:sprite];
@@ -244,7 +382,7 @@ static const CGFloat radiusDebugLine            = 2.0;
 
     NSMutableArray *hitEnemies = [NSMutableArray array];
     
-    for (CCSprite *sprite in self.children) {
+    for (CCSprite *sprite in self.backgroundLayer.children) {
         if ([sprite.name isEqualToString:kZCEnemySpriteName]) {
             if (CGRectIntersectsRect(CGRectInset([sprite boundingBox], 20, 20), [self.zombie boundingBox])) {
                 [hitEnemies addObject:sprite];
@@ -271,12 +409,12 @@ static const CGFloat radiusDebugLine            = 2.0;
     CGFloat x = CGFloatRandomInRange(CGRectGetMinX(rect), CGRectGetMaxX(rect));
     CGFloat y = CGFloatRandomInRange(CGRectGetMinY(rect), CGRectGetMaxY(rect));
     
-    cat.position = CGPointMake(x, y);
+    cat.position = [self.backgroundLayer convertToNodeSpace:CGPointMake(x, y)];
     [cat setScale:0];
     
     cat.name = kZCCatSpriteName;
     
-    [self addChild:cat];
+    [self.backgroundLayer addChild:cat];
     
     cat.rotation = CC_RADIANS_TO_DEGREES(- M_PI / 16.0);
     
@@ -302,27 +440,29 @@ static const CGFloat radiusDebugLine            = 2.0;
 
 - (void)spawnEnemy {
     CCSprite *enemy = [CCSprite spriteWithImageNamed:@"enemy.png"];
-    CGFloat scaleX = self.spriteSize.width / enemy.contentSize.width;
-    CGFloat scaleY = self.spriteSize.height / enemy.contentSize.height;
+    CGFloat scaleX = (self.spriteSize.width * 2) / enemy.contentSize.width;
+    CGFloat scaleY = (self.spriteSize.height * 2) / enemy.contentSize.height;
     
     CGFloat scale = scaleX < scaleY ? scaleX : scaleY;
     
     enemy.scale = scale;
     
     CGSize size = self.contentSize;
-    CGSize enemySize = enemy.contentSize;
+    CGSize enemySize = enemy.boundingBox.size;
     
     CGFloat min = CGRectGetMinY([self boundingBox]) + enemySize.height / 2;
     CGFloat max = CGRectGetMaxY([self boundingBox]) - enemySize.height / 2;
     
-    enemy.position = CGPointMake(size.width - enemySize.width / 2, CGFloatRandomInRange(min, max));
+    CGPoint enemyPosition = [self.backgroundLayer convertToNodeSpace:CGPointMake(size.width - enemySize.width / 2,
+                                                                                 CGFloatRandomInRange(min, max))];
+    enemy.position = enemyPosition;
     
     enemy.name = kZCEnemySpriteName;
     
-    [self addChild:enemy];
+    [self.backgroundLayer addChild:enemy];
     
-    CCAction *actionMove = [CCActionMoveTo actionWithDuration:4
-                                                     position:ccp((-enemySize.width / 2), enemy.position.y)];
+    CGPoint moveToPoint = [self.backgroundLayer convertToNodeSpace:ccp((-enemySize.width / 2), enemy.position.y)];
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:4 position:moveToPoint];
     
     CCAction *actionRemove = [CCActionRemove action];
     [enemy runAction:[CCActionSequence actionWithArray:@[actionMove, actionRemove]]];
@@ -359,8 +499,9 @@ static const CGFloat radiusDebugLine            = 2.0;
 }
 
 - (void)boundsCheckZombie {
-    CGPoint bottomLeft = CGPointMake(0, CGRectGetMinY([self boundingBox]));
-    CGPoint topRight = CGPointMake(self.contentSize.width, CGRectGetMaxY([self boundingBox]));
+    CGPoint bottomLeft = [self.backgroundLayer convertToNodeSpace:CGPointZero];
+    CGPoint topRight = [self.backgroundLayer convertToNodeSpace:CGPointMake(self.contentSize.width,
+                                                                            self.contentSize.height)];
     
     CCSprite *zombie = self.zombie;
     
@@ -406,7 +547,7 @@ static const CGFloat radiusDebugLine            = 2.0;
     [shape drawSegmentFrom:rightBottom to:rightUp radius:radiusDebugLine color:color];
     [shape drawSegmentFrom:leftUp to:rightUp radius:radiusDebugLine color:color];
   
-    [self addChild:shape];
+    [self.backgroundLayer addChild:shape];
 }
 
 @end

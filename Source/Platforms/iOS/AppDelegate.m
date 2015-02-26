@@ -28,7 +28,7 @@
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
 
-#import "ZCMenu.h"
+#import "ZCMaineScene.h"
 
 
 @implementation AppController
@@ -62,7 +62,7 @@
 
 - (CCScene*) startScene
 {
-    return [ZCMenu node];
+    return [ZCMaineScene node];
 }
 
 @end

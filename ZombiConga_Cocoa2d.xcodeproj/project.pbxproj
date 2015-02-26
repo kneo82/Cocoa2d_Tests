@@ -14,8 +14,6 @@
 		55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3851A7FCAA700FB9E4C /* zombie3.png */; };
 		55A7F38C1A7FCAA700FB9E4C /* zombie4.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3861A7FCAA700FB9E4C /* zombie4.png */; };
 		55BCFBFB1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */; };
-		55BD93401A8208AD00EA7890 /* CCAnimatedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD933F1A8208AD00EA7890 /* CCAnimatedSprite.m */; };
-		55BD93451A8209F000EA7890 /* ZCZombieSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD93441A8209F000EA7890 /* ZCZombieSprite.m */; };
 		55C3F4DA1A7F5A8300711602 /* configCocos2d.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4D91A7F5A8300711602 /* configCocos2d.plist */; };
 		55C3F4E41A7F5C7300711602 /* ZCMaineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */; };
 		55C3F4F81A7FB9C200711602 /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4EC1A7FB9C200711602 /* background1.png */; };
@@ -58,8 +56,6 @@
 		7A97911719E631C6001FFC4D /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A97910419E62E40001FFC4D /* libcocos2d-mac.a */; };
 		7A97911819E631CD001FFC4D /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9790FE19E62E40001FFC4D /* libcocos2d.a */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
-		84A1D7A41A8BF04B00CB0CAA /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1D7A31A8BF04B00CB0CAA /* GameOverScene.m */; };
-		84D1363E1A8F96EB0099FBEA /* ZCMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1363D1A8F96EB0099FBEA /* ZCMenu.m */; };
 		927F61A5196C771E000F43EF /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3517B978D7009739AE /* OpenAL.framework */; };
 		927F61A9196C771E000F43EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3D17B978D7009739AE /* Foundation.framework */; };
 		927F61AA196C771E000F43EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77F1B3F17B978D7009739AE /* CoreGraphics.framework */; };
@@ -155,10 +151,6 @@
 		55A7F3861A7FCAA700FB9E4C /* zombie4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie4.png; sourceTree = "<group>"; };
 		55BCFBF91A812B1F003AEBC6 /* CGGeometry+ZCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGGeometry+ZCExtension.h"; sourceTree = "<group>"; };
 		55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CGGeometry+ZCExtension.m"; sourceTree = "<group>"; };
-		55BD933E1A8208AD00EA7890 /* CCAnimatedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAnimatedSprite.h; path = ../Scenes/CCAnimatedSprite.h; sourceTree = "<group>"; };
-		55BD933F1A8208AD00EA7890 /* CCAnimatedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCAnimatedSprite.m; path = ../Scenes/CCAnimatedSprite.m; sourceTree = "<group>"; };
-		55BD93431A8209F000EA7890 /* ZCZombieSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCZombieSprite.h; sourceTree = "<group>"; };
-		55BD93441A8209F000EA7890 /* ZCZombieSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCZombieSprite.m; sourceTree = "<group>"; };
 		55C3F4D91A7F5A8300711602 /* configCocos2d.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configCocos2d.plist; sourceTree = "<group>"; };
 		55C3F4E21A7F5C7300711602 /* ZCMaineScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCMaineScene.h; sourceTree = "<group>"; };
 		55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCMaineScene.m; sourceTree = "<group>"; };
@@ -195,10 +187,6 @@
 		7AFCD5DD19E9BDC200BCCCDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Source/Bridging-Header.h"; sourceTree = "<group>"; };
 		7BF6AF9F1A425F9800FFF9BA /* JavaFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaFoundation.framework; path = "../../../../../../../Library/SBAndroid/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaFoundation.framework"; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		84A1D7A21A8BF04B00CB0CAA /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
-		84A1D7A31A8BF04B00CB0CAA /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
-		84D1363C1A8F96EA0099FBEA /* ZCMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCMenu.h; sourceTree = "<group>"; };
-		84D1363D1A8F96EB0099FBEA /* ZCMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCMenu.m; sourceTree = "<group>"; };
 		927F61BF196C771E000F43EF /* ZombiConga_Cocoa2d Android.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZombiConga_Cocoa2d Android.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
 		B71F5908188484E7003F4D28 /* iPad-old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old@2x.png"; path = "Icons/iPad-old@2x.png"; sourceTree = "<group>"; };
@@ -306,27 +294,11 @@
 			path = ../../Platforms/iOS/sprites;
 			sourceTree = "<group>";
 		};
-		55BD93421A8209B700EA7890 /* Sprites */ = {
-			isa = PBXGroup;
-			children = (
-				55BD933E1A8208AD00EA7890 /* CCAnimatedSprite.h */,
-				55BD933F1A8208AD00EA7890 /* CCAnimatedSprite.m */,
-				55BD93431A8209F000EA7890 /* ZCZombieSprite.h */,
-				55BD93441A8209F000EA7890 /* ZCZombieSprite.m */,
-			);
-			name = Sprites;
-			path = Source/Platforms/iOS/Sprites;
-			sourceTree = "<group>";
-		};
 		55C3F4CF1A7F565800711602 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				55C3F4E21A7F5C7300711602 /* ZCMaineScene.h */,
 				55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */,
-				84A1D7A21A8BF04B00CB0CAA /* GameOverScene.h */,
-				84A1D7A31A8BF04B00CB0CAA /* GameOverScene.m */,
-				84D1363C1A8F96EA0099FBEA /* ZCMenu.h */,
-				84D1363D1A8F96EB0099FBEA /* ZCMenu.m */,
 			);
 			name = Scenes;
 			path = Source/Platforms/iOS/Scenes;
@@ -415,7 +387,6 @@
 		7A40362119DDF08C007B6E8F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				55BD93421A8209B700EA7890 /* Sprites */,
 				55C3F4CF1A7F565800711602 /* Scenes */,
 				55BCFBF91A812B1F003AEBC6 /* CGGeometry+ZCExtension.h */,
 				55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */,
@@ -893,12 +864,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A1D7A41A8BF04B00CB0CAA /* GameOverScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
-				55BD93451A8209F000EA7890 /* ZCZombieSprite.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
-				55BD93401A8208AD00EA7890 /* CCAnimatedSprite.m in Sources */,
-				84D1363E1A8F96EB0099FBEA /* ZCMenu.m in Sources */,
 				55BCFBFB1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m in Sources */,
 				55C3F4E41A7F5C7300711602 /* ZCMaineScene.m in Sources */,
 			);

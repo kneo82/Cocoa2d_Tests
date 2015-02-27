@@ -14,12 +14,12 @@
 		55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3851A7FCAA700FB9E4C /* zombie3.png */; };
 		55A7F38C1A7FCAA700FB9E4C /* zombie4.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3861A7FCAA700FB9E4C /* zombie4.png */; };
 		55BCFBFB1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */; };
+		55C261DE1AA0598B006A498E /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C261DD1AA0598B006A498E /* Launch Screen.xib */; };
 		55C35D461A9F42C900800BA7 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D411A9F42C900800BA7 /* circle.png */; };
 		55C35D471A9F42C900800BA7 /* octagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D421A9F42C900800BA7 /* octagon.png */; };
 		55C35D481A9F42C900800BA7 /* sand.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D431A9F42C900800BA7 /* sand.png */; };
 		55C35D491A9F42C900800BA7 /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D441A9F42C900800BA7 /* square.png */; };
 		55C35D4A1A9F42C900800BA7 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D451A9F42C900800BA7 /* triangle.png */; };
-		55C35D4C1A9F5A5E00800BA7 /* square@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D4B1A9F5A5E00800BA7 /* square@1x.png */; };
 		55C3F4DA1A7F5A8300711602 /* configCocos2d.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4D91A7F5A8300711602 /* configCocos2d.plist */; };
 		55C3F4E41A7F5C7300711602 /* ZCMaineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */; };
 		55C3F4F81A7FB9C200711602 /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4EC1A7FB9C200711602 /* background1.png */; };
@@ -56,7 +56,6 @@
 		7A40370019DE401F007B6E8F /* Settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5910188484E7003F4D28 /* Settings@2x.png */; };
 		7A59493B19E37F9300F65F90 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A59493A19E37F9300F65F90 /* OpenGL.framework */; };
 		7A59493D19E37FB200F65F90 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A59493C19E37FB200F65F90 /* libz.dylib */; };
-		7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A59498A19E38E4A00F65F90 /* MainMenu.xib */; };
 		7A59498E19E3941300F65F90 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360619DDEE84007B6E8F /* AppDelegate.m */; };
 		7A97910819E62F84001FFC4D /* libcocos2dAndroid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A97910019E62E40001FFC4D /* libcocos2dAndroid.a */; };
 		7A97911719E631C6001FFC4D /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A97910419E62E40001FFC4D /* libcocos2d-mac.a */; };
@@ -157,12 +156,12 @@
 		55A7F3861A7FCAA700FB9E4C /* zombie4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie4.png; sourceTree = "<group>"; };
 		55BCFBF91A812B1F003AEBC6 /* CGGeometry+ZCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGGeometry+ZCExtension.h"; sourceTree = "<group>"; };
 		55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CGGeometry+ZCExtension.m"; sourceTree = "<group>"; };
+		55C261DD1AA0598B006A498E /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		55C35D411A9F42C900800BA7 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
 		55C35D421A9F42C900800BA7 /* octagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = octagon.png; sourceTree = "<group>"; };
 		55C35D431A9F42C900800BA7 /* sand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sand.png; sourceTree = "<group>"; };
 		55C35D441A9F42C900800BA7 /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
 		55C35D451A9F42C900800BA7 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
-		55C35D4B1A9F5A5E00800BA7 /* square@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square@1x.png"; sourceTree = "<group>"; };
 		55C3F4D91A7F5A8300711602 /* configCocos2d.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configCocos2d.plist; sourceTree = "<group>"; };
 		55C3F4E21A7F5C7300711602 /* ZCMaineScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCMaineScene.h; sourceTree = "<group>"; };
 		55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCMaineScene.m; sourceTree = "<group>"; };
@@ -182,18 +181,14 @@
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B12102E197484FA004C1E1D /* ZombiConga_Cocoa_dActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZombiConga_Cocoa_dActivity.h; path = Source/Platforms/Android/ZombiConga_Cocoa_dActivity.h; sourceTree = "<group>"; };
 		5B12102F197484FA004C1E1D /* ZombiConga_Cocoa_dActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZombiConga_Cocoa_dActivity.m; path = Source/Platforms/Android/ZombiConga_Cocoa_dActivity.m; sourceTree = "<group>"; };
-		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
-		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* ZombiConga_Cocoa2d Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ZombiConga_Cocoa2d Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A40360219DDEE84007B6E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Mac/Info.plist; sourceTree = "<group>"; };
 		7A40360319DDEE84007B6E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/Platforms/Mac/main.m; sourceTree = "<group>"; };
 		7A40360519DDEE84007B6E8F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/Platforms/Mac/AppDelegate.h; sourceTree = "<group>"; };
 		7A40360619DDEE84007B6E8F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/Platforms/Mac/AppDelegate.m; sourceTree = "<group>"; };
 		7A4036F419DE3FA8007B6E8F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		7A59493A19E37F9300F65F90 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		7A59493C19E37FB200F65F90 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		7A59498A19E38E4A00F65F90 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Platforms/Mac/MainMenu.xib; sourceTree = "<group>"; };
 		7AFCD5DB19E9BD9F00BCCCDA /* cocos2d.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cocos2d.h; path = "Source/libs/cocos2d-iphone/cocos2d/cocos2d.h"; sourceTree = "<group>"; };
 		7AFCD5DD19E9BDC200BCCCDA /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Source/Bridging-Header.h"; sourceTree = "<group>"; };
 		7BF6AF9F1A425F9800FFF9BA /* JavaFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaFoundation.framework; path = "../../../../../../../Library/SBAndroid/Application Support/Developer/Shared/Xcode/Platforms/Android.platform/Developer/SDKs/SBAndroid.sdk/System/Library/Frameworks/JavaFoundation.framework"; sourceTree = "<group>"; };
@@ -308,7 +303,6 @@
 		55C35D401A9F42C900800BA7 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				55C35D4B1A9F5A5E00800BA7 /* square@1x.png */,
 				55C35D411A9F42C900800BA7 /* circle.png */,
 				55C35D421A9F42C900800BA7 /* octagon.png */,
 				55C35D431A9F42C900800BA7 /* sand.png */,
@@ -449,8 +443,6 @@
 			isa = PBXGroup;
 			children = (
 				7A40366219DDF8CB007B6E8F /* iOS */,
-				7A40366319DDF8D4007B6E8F /* Android */,
-				7A40366419DDF8DB007B6E8F /* Mac */,
 			);
 			name = Platforms;
 			sourceTree = "<group>";
@@ -463,26 +455,9 @@
 				55C3F4F11A7FB9C200711602 /* Sounds */,
 				5B121034197485FE004C1E1D /* Info.plist */,
 				55C3F4D91A7F5A8300711602 /* configCocos2d.plist */,
+				55C261DD1AA0598B006A498E /* Launch Screen.xib */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		7A40366319DDF8D4007B6E8F /* Android */ = {
-			isa = PBXGroup;
-			children = (
-				5BA4619E1974C88900785744 /* AndroidManifest.xml */,
-				5B121033197485FE004C1E1D /* Info.plist */,
-			);
-			name = Android;
-			sourceTree = "<group>";
-		};
-		7A40366419DDF8DB007B6E8F /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				7A40360219DDEE84007B6E8F /* Info.plist */,
-				7A59498A19E38E4A00F65F90 /* MainMenu.xib */,
-			);
-			name = Mac;
 			sourceTree = "<group>";
 		};
 		7A9790F619E62E3F001FFC4D /* Products */ = {
@@ -753,7 +728,6 @@
 				7A4036FB19DE401F007B6E8F /* iPhone-old.png in Resources */,
 				7A4036FC19DE401F007B6E8F /* iPhone-old@2x.png in Resources */,
 				7A4036FD19DE401F007B6E8F /* iPhone.png in Resources */,
-				7A59498B19E38E4A00F65F90 /* MainMenu.xib in Resources */,
 				7A4036FE19DE401F007B6E8F /* iPhone@2x.png in Resources */,
 				7A4036FF19DE401F007B6E8F /* Settings.png in Resources */,
 				7A40370019DE401F007B6E8F /* Settings@2x.png in Resources */,
@@ -790,6 +764,7 @@
 				55A7F3881A7FCAA700FB9E4C /* enemy.png in Resources */,
 				55C35D491A9F42C900800BA7 /* square.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
+				55C261DE1AA0598B006A498E /* Launch Screen.xib in Resources */,
 				55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */,
 				55C3F4FB1A7FB9C200711602 /* YouLose.png in Resources */,
 				55C3F4F81A7FB9C200711602 /* background1.png in Resources */,
@@ -806,7 +781,6 @@
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				55C3F4FC1A7FB9C200711602 /* YouWin.png in Resources */,
 				55C3F5001A7FB9C200711602 /* lose.wav in Resources */,
-				55C35D4C1A9F5A5E00800BA7 /* square@1x.png in Resources */,
 				55C3F4FF1A7FB9C200711602 /* hitCatLady.wav in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				55A7F3891A7FCAA700FB9E4C /* zombie1.png in Resources */,

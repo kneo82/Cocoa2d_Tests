@@ -14,6 +14,12 @@
 		55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3851A7FCAA700FB9E4C /* zombie3.png */; };
 		55A7F38C1A7FCAA700FB9E4C /* zombie4.png in Resources */ = {isa = PBXBuildFile; fileRef = 55A7F3861A7FCAA700FB9E4C /* zombie4.png */; };
 		55BCFBFB1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */; };
+		55C35D461A9F42C900800BA7 /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D411A9F42C900800BA7 /* circle.png */; };
+		55C35D471A9F42C900800BA7 /* octagon.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D421A9F42C900800BA7 /* octagon.png */; };
+		55C35D481A9F42C900800BA7 /* sand.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D431A9F42C900800BA7 /* sand.png */; };
+		55C35D491A9F42C900800BA7 /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D441A9F42C900800BA7 /* square.png */; };
+		55C35D4A1A9F42C900800BA7 /* triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D451A9F42C900800BA7 /* triangle.png */; };
+		55C35D4C1A9F5A5E00800BA7 /* square@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C35D4B1A9F5A5E00800BA7 /* square@1x.png */; };
 		55C3F4DA1A7F5A8300711602 /* configCocos2d.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4D91A7F5A8300711602 /* configCocos2d.plist */; };
 		55C3F4E41A7F5C7300711602 /* ZCMaineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */; };
 		55C3F4F81A7FB9C200711602 /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = 55C3F4EC1A7FB9C200711602 /* background1.png */; };
@@ -151,6 +157,12 @@
 		55A7F3861A7FCAA700FB9E4C /* zombie4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombie4.png; sourceTree = "<group>"; };
 		55BCFBF91A812B1F003AEBC6 /* CGGeometry+ZCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CGGeometry+ZCExtension.h"; sourceTree = "<group>"; };
 		55BCFBFA1A812B1F003AEBC6 /* CGGeometry+ZCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CGGeometry+ZCExtension.m"; sourceTree = "<group>"; };
+		55C35D411A9F42C900800BA7 /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+		55C35D421A9F42C900800BA7 /* octagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = octagon.png; sourceTree = "<group>"; };
+		55C35D431A9F42C900800BA7 /* sand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sand.png; sourceTree = "<group>"; };
+		55C35D441A9F42C900800BA7 /* square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = square.png; sourceTree = "<group>"; };
+		55C35D451A9F42C900800BA7 /* triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangle.png; sourceTree = "<group>"; };
+		55C35D4B1A9F5A5E00800BA7 /* square@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "square@1x.png"; sourceTree = "<group>"; };
 		55C3F4D91A7F5A8300711602 /* configCocos2d.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configCocos2d.plist; sourceTree = "<group>"; };
 		55C3F4E21A7F5C7300711602 /* ZCMaineScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCMaineScene.h; sourceTree = "<group>"; };
 		55C3F4E31A7F5C7300711602 /* ZCMaineScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCMaineScene.m; sourceTree = "<group>"; };
@@ -165,7 +177,6 @@
 		55C3F4F51A7FB9C200711602 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lose.wav; sourceTree = "<group>"; };
 		55C3F4F61A7FB9C200711602 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		5B12100919748273004C1E1D /* libEGL.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.so; path = /usr/lib/armv7a/libEGL.so; sourceTree = SDKROOT; };
-		5B12100F197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121011197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121013197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
 		5B121015197483EE004C1E1D /* ic_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher.png; sourceTree = "<group>"; };
@@ -294,6 +305,19 @@
 			path = ../../Platforms/iOS/sprites;
 			sourceTree = "<group>";
 		};
+		55C35D401A9F42C900800BA7 /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				55C35D4B1A9F5A5E00800BA7 /* square@1x.png */,
+				55C35D411A9F42C900800BA7 /* circle.png */,
+				55C35D421A9F42C900800BA7 /* octagon.png */,
+				55C35D431A9F42C900800BA7 /* sand.png */,
+				55C35D441A9F42C900800BA7 /* square.png */,
+				55C35D451A9F42C900800BA7 /* triangle.png */,
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
 		55C3F4CF1A7F565800711602 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,20 +357,11 @@
 		5B12100D197483EE004C1E1D /* res */ = {
 			isa = PBXGroup;
 			children = (
-				5B12100E197483EE004C1E1D /* drawable-hdpi */,
 				5B121010197483EE004C1E1D /* drawable-mdpi */,
 				5B121012197483EE004C1E1D /* drawable-xhdpi */,
 				5B121014197483EE004C1E1D /* drawable-xxhdpi */,
 			);
 			path = res;
-			sourceTree = "<group>";
-		};
-		5B12100E197483EE004C1E1D /* drawable-hdpi */ = {
-			isa = PBXGroup;
-			children = (
-				5B12100F197483EE004C1E1D /* ic_launcher.png */,
-			);
-			path = "drawable-hdpi";
 			sourceTree = "<group>";
 		};
 		5B121010197483EE004C1E1D /* drawable-mdpi */ = {
@@ -443,6 +458,7 @@
 		7A40366219DDF8CB007B6E8F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				55C35D401A9F42C900800BA7 /* Shapes */,
 				55C3F4EB1A7FB9C200711602 /* Images */,
 				55C3F4F11A7FB9C200711602 /* Sounds */,
 				5B121034197485FE004C1E1D /* Info.plist */,
@@ -766,25 +782,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A7F3871A7FCAA700FB9E4C /* cat.png in Resources */,
+				55C35D471A9F42C900800BA7 /* octagon.png in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				55A7F38C1A7FCAA700FB9E4C /* zombie4.png in Resources */,
 				55C3F4FA1A7FB9C200711602 /* MainMenu.png in Resources */,
 				55C3F4F91A7FB9C200711602 /* background2.png in Resources */,
 				55A7F3881A7FCAA700FB9E4C /* enemy.png in Resources */,
+				55C35D491A9F42C900800BA7 /* square.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				55A7F38B1A7FCAA700FB9E4C /* zombie3.png in Resources */,
 				55C3F4FB1A7FB9C200711602 /* YouLose.png in Resources */,
 				55C3F4F81A7FB9C200711602 /* background1.png in Resources */,
+				55C35D481A9F42C900800BA7 /* sand.png in Resources */,
 				55C3F4DA1A7F5A8300711602 /* configCocos2d.plist in Resources */,
+				55C35D461A9F42C900800BA7 /* circle.png in Resources */,
 				55A7F38A1A7FCAA700FB9E4C /* zombie2.png in Resources */,
 				55C3F4FD1A7FB9C200711602 /* backgroundMusic.mp3 in Resources */,
 				55C3F4FE1A7FB9C200711602 /* hitCat.wav in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
 				B71F5916188484E7003F4D28 /* iPhone-old@2x.png in Resources */,
+				55C35D4A1A9F42C900800BA7 /* triangle.png in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				55C3F4FC1A7FB9C200711602 /* YouWin.png in Resources */,
 				55C3F5001A7FB9C200711602 /* lose.wav in Resources */,
+				55C35D4C1A9F5A5E00800BA7 /* square@1x.png in Resources */,
 				55C3F4FF1A7FB9C200711602 /* hitCatLady.wav in Resources */,
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				55A7F3891A7FCAA700FB9E4C /* zombie1.png in Resources */,

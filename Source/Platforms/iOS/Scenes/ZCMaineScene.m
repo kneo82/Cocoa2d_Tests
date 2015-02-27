@@ -36,12 +36,40 @@
         
         CCPhysicsNode* physicsNode = [CCPhysicsNode node];
         [self addChild:physicsNode z:10];
-        physicsNode.gravity = ccp(0,-10);
+        physicsNode.gravity = ccp(0,-1000);
         
         physicsNode.debugDraw = YES;
         
         self.physicWorld = physicsNode;
         
+        CCPhysicsBody *body1 = [CCPhysicsBody bodyWithRect:CGRectMake(0, 0, self.winSize.width, 0) cornerRadius:0];
+        CCPhysicsBody *body2 = [CCPhysicsBody bodyWithRect:CGRectMake(0, 0, 0, self.winSize.height) cornerRadius:0];
+        CCPhysicsBody *body3 = [CCPhysicsBody bodyWithRect:CGRectMake(self.winSize.width, 0, 0, self.winSize.height) cornerRadius:0];
+        CCPhysicsBody *body4 = [CCPhysicsBody bodyWithRect:CGRectMake(0, self.winSize.height, self.winSize.width, 0) cornerRadius:0];
+        
+        body1.type = CCPhysicsBodyTypeStatic;
+        body2.type = CCPhysicsBodyTypeStatic;
+        body3.type = CCPhysicsBodyTypeStatic;
+        body4.type = CCPhysicsBodyTypeStatic;
+        
+        CCNode *node1 = [CCNode node];
+        node1.physicsBody = body1;
+        [self.physicWorld addChild:node1];
+        
+        CCNode *node2 = [CCNode node];
+        node2.physicsBody = body2;
+        [self.physicWorld addChild:node2];
+        
+        CCNode *node3 = [CCNode node];
+        node3.physicsBody = body3;
+        [self.physicWorld addChild:node3];
+        
+        CCNode *node4 = [CCNode node];
+        node4.physicsBody = body4;
+        [self.physicWorld addChild:node4];
+        
+//        self.physicWorld.physicsBody.type = 
+       
 
         ccColor4B color = {50, 45, 30, 255};
         CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithCcColor4b:color]];
@@ -92,8 +120,12 @@
     
     CCSprite *square = [CCSprite spriteWithImageNamed:@"square.png"];
     square.position = ccp(self.winSize.width * 0.25, self.winSize.height * 0.50);
-    self.square = square;
+    CGSize squareSyze = square.contentSize;
+
+    CGRect squareRect = CGRectMake(0, 0, squareSyze.width, squareSyze.height);
+    square.physicsBody = [CCPhysicsBody bodyWithRect:squareRect cornerRadius:0];
     
+    self.square = square;
     [self.physicWorld addChild:square];
     
     CCSprite *circle = [CCSprite spriteWithImageNamed:@"circle.png"];
@@ -110,6 +142,13 @@
     self.triangle = triangle;
     
     [self.physicWorld addChild:triangle];
+    
+    CGMutablePathRef trianglePath = CGPathCreateMutable();
+    CGPathMoveToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
+    CGPathAddLineToPoint(trianglePath, nil, triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
+    CGPathAddLineToPoint(trianglePath, nil, 0, triangle.contentSize.height / 2);
+    CGPathAddLineToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
+//    triangle.physicsBody = [CCPhysicsBody ]
 }
 
 @end

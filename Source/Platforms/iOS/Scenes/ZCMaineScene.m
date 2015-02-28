@@ -142,12 +142,19 @@
     self.triangle = triangle;
     
     [self.physicWorld addChild:triangle];
+    CGPoint point1 = ccp(0, 0);
+    CGPoint point2 = ccp(triangle.contentSize.width / 2, triangle.contentSize.height);
+    CGPoint point3 = ccp( triangle.contentSize.width, 0);
     
-    CGMutablePathRef trianglePath = CGPathCreateMutable();
-    CGPathMoveToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
-    CGPathAddLineToPoint(trianglePath, nil, triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
-    CGPathAddLineToPoint(trianglePath, nil, 0, triangle.contentSize.height / 2);
-    CGPathAddLineToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
+    CGPoint points[] = {point1, point2, point3};
+    
+    triangle.physicsBody = [CCPhysicsBody bodyWithPolygonFromPoints:points count:3 cornerRadius:0];
+    
+//    CGMutablePathRef trianglePath = CGPathCreateMutable();
+//    CGPathMoveToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
+//    CGPathAddLineToPoint(trianglePath, nil, triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
+//    CGPathAddLineToPoint(trianglePath, nil, 0, triangle.contentSize.height / 2);
+//    CGPathAddLineToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
 //    triangle.physicsBody = [CCPhysicsBody ]
 }
 

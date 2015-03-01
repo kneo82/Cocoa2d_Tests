@@ -9,6 +9,8 @@
 #import "ZCMaineScene.h"
 #import "CGGeometry+ZCExtension.h"
 
+static const CGFloat kZCBorderSize = 20;
+
 @interface ZCMaineScene ()
 @property (nonatomic, assign)   CGSize          winSize;
 
@@ -17,8 +19,10 @@
 @property (nonatomic, strong)   CCSprite        *square;
 @property (nonatomic, strong)   CCSprite        *circle;
 @property (nonatomic, strong)   CCSprite        *triangle;
+@property (nonatomic, strong)   CCSprite        *octagon;
 
 - (void)setupSprites;
+- (void)spawnSand;
 
 @end
 
@@ -42,10 +46,29 @@
         
         self.physicWorld = physicsNode;
         
-        CCPhysicsBody *body1 = [CCPhysicsBody bodyWithRect:CGRectMake(0, 0, self.winSize.width, 0) cornerRadius:0];
-        CCPhysicsBody *body2 = [CCPhysicsBody bodyWithRect:CGRectMake(0, 0, 0, self.winSize.height) cornerRadius:0];
-        CCPhysicsBody *body3 = [CCPhysicsBody bodyWithRect:CGRectMake(self.winSize.width, 0, 0, self.winSize.height) cornerRadius:0];
-        CCPhysicsBody *body4 = [CCPhysicsBody bodyWithRect:CGRectMake(0, self.winSize.height, self.winSize.width, 0) cornerRadius:0];
+        CCPhysicsBody *body1 = [CCPhysicsBody bodyWithRect:CGRectMake(0,
+                                                                      kZCBorderSize / 4 - kZCBorderSize,
+                                                                      self.winSize.width,
+                                                                      16)
+                                              cornerRadius:0];
+        
+        CCPhysicsBody *body2 = [CCPhysicsBody bodyWithRect:CGRectMake(kZCBorderSize / 4 - kZCBorderSize,
+                                                                      0,
+                                                                      16,
+                                                                      self.winSize.height)
+                                              cornerRadius:0];
+        
+        CCPhysicsBody *body3 = [CCPhysicsBody bodyWithRect:CGRectMake(self.winSize.width - 1,
+                                                                      0,
+                                                                      16,
+                                                                      self.winSize.height)
+                                              cornerRadius:0];
+        
+        CCPhysicsBody *body4 = [CCPhysicsBody bodyWithRect:CGRectMake(1,
+                                                                      self.winSize.height - 1,
+                                                                      self.winSize.width,
+                                                                      16)
+                                              cornerRadius:0];
         
         body1.type = CCPhysicsBodyTypeStatic;
         body2.type = CCPhysicsBodyTypeStatic;
@@ -79,6 +102,12 @@
         self.userInteractionEnabled = YES;
         
         [self setupSprites];
+        
+        CCAction *repeatAction = [CCActionRepeat actionWithAction:[CCActionCallFunc actionWithTarget:self
+                                                                                selector:@selector(spawnSand)]
+                                                      times:100];
+        
+        [self runAction:repeatAction];
     }
     
     return self;
@@ -98,6 +127,17 @@
     CGPoint touchLocation = [touch locationInNode:self];
     
     NSLog(@"Touch Began : (%@)", NSStringFromCGPoint(touchLocation));
+    
+    for (CCSprite *node in self.physicWorld.children) {
+        if ([node.name isEqualToString: @"sand"]) {
+            [node.physicsBody applyImpulse:ccp(0, arc4random_uniform(500))];
+        }
+    }
+    
+    CCActionMoveBy *shake = [CCActionMoveBy actionWithDuration:0.05 position:ccp(0, 10)];
+    CCActionRepeat *repeart = [CCActionRepeat actionWithAction:[CCActionSequence actionWithArray:@[shake, shake.reverse]] times:5];
+    
+    [self runAction:repeart];
 }
 
 - (void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
@@ -150,12 +190,43 @@
     
     triangle.physicsBody = [CCPhysicsBody bodyWithPolygonFromPoints:points count:3 cornerRadius:0];
     
-//    CGMutablePathRef trianglePath = CGPathCreateMutable();
-//    CGPathMoveToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
-//    CGPathAddLineToPoint(trianglePath, nil, triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
-//    CGPathAddLineToPoint(trianglePath, nil, 0, triangle.contentSize.height / 2);
-//    CGPathAddLineToPoint(trianglePath, nil, -triangle.contentSize.width / 2, -triangle.contentSize.height / 2);
-//    triangle.physicsBody = [CCPhysicsBody ]
+    CCSprite *octagon = [CCSprite spriteWithImageNamed:@"octagon.png"];
+    octagon.position = ccp(self.winSize.width * 0.5, self.winSize.height * 0.75);
+    self.octagon = octagon;
+    
+    [self.physicWorld addChild:octagon];
+    CGFloat width = octagon.contentSize.width;
+    CGFloat height = octagon.contentSize.height;
+    CGFloat w2 = width / 2;
+    CGFloat h2 = height / 2;
+    
+    CGPoint point11 = ccp(-width / 4 + w2, -height / 2 + h2);
+    CGPoint point21 = ccp(-width / 2 + w2, -height / 4 + h2);
+    CGPoint point31 = ccp(-width / 2 + w2, height / 4 + h2);
+    CGPoint point4 = ccp(-width / 4 + w2, height / 2 + h2);
+    CGPoint point5 = ccp(width / 4 + w2, height / 2 + h2);
+    CGPoint point6 = ccp(width / 2 + w2, height / 4 + h2);
+    CGPoint point7 = ccp(width / 2 + w2, -height / 4 + h2);
+    CGPoint point8 = ccp(width / 4 + w2, -height / 2 + h2);
+    
+    CGPoint points2[] = {point11, point21, point31, point4, point5, point6, point7, point8};
+    
+    octagon.physicsBody = [CCPhysicsBody bodyWithPolygonFromPoints:points2 count:8 cornerRadius:0];
+
+}
+
+- (void)spawnSand {
+    CCSprite *sand = [CCSprite spriteWithImageNamed:@"sand.png"];
+    
+    sand.position = ccp((float)(arc4random()%(int)self.winSize.width),
+                        self.winSize.height - sand.contentSize.height);
+    
+    CGFloat radius = (sand.contentSize.width / 2) ;
+    sand.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:radius andCenter:ccp(radius, radius)];
+    
+    [self.physicWorld addChild:sand];
+    sand.name = @"sand";
+    sand.physicsBody.friction = 1.2;
 }
 
 @end
